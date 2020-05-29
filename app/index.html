@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Title of the document</title>
+    <script src="src/addition.js"></script>
+    <script src="src/multiple.js"></script>
+    <script src="src/subtraction.js"></script>
+    <script src="src/division.js"></script>
+    <script src="src/clearResult.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="./main.css" />
+</head>
+
+<body>
+
+    <div class="container">
+        <input id="firstNumber" placeholder="First number" type="number">
+        <input id="secondNumber" placeholder="Second number" type="number">
+        <button class="addition operator" onclick="addition(firstNumber, secondNumber)">+</button>
+        <button class="subtraction operator" onclick="subtraction()">-</button>
+        <button class="multiple operator" onclick="multiple()">*</button>
+        <button class="division operator" onclick="division()">/</button>
+        <button class="division operator" onclick="clearResult()">C</button>
+        <div>Result: </div>
+        <div id="result"></div>
+    </div>
+</body>
+
+</html>
