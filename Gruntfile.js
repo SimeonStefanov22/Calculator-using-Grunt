@@ -7,11 +7,21 @@ module.exports = function (grunt) {
 
   var fileConfigurations = {
     sources: {
-      ui: [
-        
-      ]
+        ui: [
+            'app/index.html',
+            'LICENSE'
+        ],
+        build : [
+          'app/dest/addition.min.js',
+          'app/dest/multiple.min.js',
+          'app/dest/subtraction.min.js',
+          'app/dest/division.min.js',
+          'app/dest/clearResult.min.js',
+          'app/dest/clearInputFields.min.js'
+            
+        ]
     }
-  };
+};
 
   grunt.initConfig({
     // pkg: grunt.file.readJSON('package.json'),
@@ -51,14 +61,15 @@ module.exports = function (grunt) {
     concat: {
       "options": { "separator": ";" },
       "build": {
-        "src": [
-        'app/dest/addition.min.js', 
-        'app/dest/multiple.min.js', 
-        'app/dest/subtraction.min.js', 
-        'app/dest/division.min.js', 
-        'app/dest/clearResult.min.js', 
-        'app/dest/clearInputFields.min.js'
-      ],
+        // "src": [
+        //   'app/dest/addition.min.js',
+        //   'app/dest/multiple.min.js',
+        //   'app/dest/subtraction.min.js',
+        //   'app/dest/division.min.js',
+        //   'app/dest/clearResult.min.js',
+        //   'app/dest/clearInputFields.min.js'
+        // ],
+        "src": fileConfigurations.sources.build,
         "dest": "app/builds/app.js"
       }
     }
