@@ -36,7 +36,8 @@ module.exports = function (grunt) {
           'app/dest/multiple.min.js': 'app/src/multiple.js',
           'app/dest/subtraction.min.js': 'app/src/subtraction.js',
           'app/dest/division.min.js': 'app/src/division.js',
-          'app/dest/clearResult.min.js': 'app/src/clearResult.js'
+          'app/dest/clearResult.min.js': 'app/src/clearResult.js',
+          'app/dest/clearInputFields.min.js': 'app/src/clearInputFields.js'
         }
       }
     },
@@ -50,7 +51,14 @@ module.exports = function (grunt) {
     concat: {
       "options": { "separator": ";" },
       "build": {
-        "src": ['app/dest/addition.min.js', 'app/dest/multiple.min.js', 'app/dest/subtraction.min.js', 'app/dest/division.min.js', 'app/dest/clearResult.min.js'],
+        "src": [
+        'app/dest/addition.min.js', 
+        'app/dest/multiple.min.js', 
+        'app/dest/subtraction.min.js', 
+        'app/dest/division.min.js', 
+        'app/dest/clearResult.min.js', 
+        'app/dest/clearInputFields.min.js'
+      ],
         "dest": "app/builds/app.js"
       }
     }
