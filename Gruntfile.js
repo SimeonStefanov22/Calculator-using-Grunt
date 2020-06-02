@@ -4,24 +4,25 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-concat');
+  grunt.loadNpmTasks('grunt-contrib-cssmin');
 
   var fileConfigurations = {
     sources: {
-        ui: [
-            'app/index.html',
-            'LICENSE'
-        ],
-        build : [
-          'app/dest/addition.min.js',
-          'app/dest/multiple.min.js',
-          'app/dest/subtraction.min.js',
-          'app/dest/division.min.js',
-          'app/dest/clearResult.min.js',
-          'app/dest/clearInputFields.min.js'
-            
-        ]
+      ui: [
+        'app/index.html',
+        'LICENSE'
+      ],
+      build: [
+        'app/dest/addition.min.js',
+        'app/dest/multiple.min.js',
+        'app/dest/subtraction.min.js',
+        'app/dest/division.min.js',
+        'app/dest/clearResult.min.js',
+        'app/dest/clearInputFields.min.js'
+
+      ]
     }
-};
+  };
 
   grunt.initConfig({
     // pkg: grunt.file.readJSON('package.json'),
@@ -59,24 +60,23 @@ module.exports = function (grunt) {
       },
     },
     concat: {
-      "options": { "separator": ";" },
-      "build": {
-        // "src": [
-        //   'app/dest/addition.min.js',
-        //   'app/dest/multiple.min.js',
-        //   'app/dest/subtraction.min.js',
-        //   'app/dest/division.min.js',
-        //   'app/dest/clearResult.min.js',
-        //   'app/dest/clearInputFields.min.js'
-        // ],
-        "src": fileConfigurations.sources.build,
-        "dest": "app/builds/app.js"
+      options: { "separator": ";" },
+      build: {
+        src: fileConfigurations.sources.build,
+        dest: "app/builds/app.js"
+      }
+    },
+    cssmin: {
+      target: {
+        files: {
+          'app/dest/main.min.css': ['app/main.css']
+        }
       }
     }
   });
 
   // Tell Grunt what to do when we type "grunt" into the terminal
   grunt.registerTask('default', [
-    'clean', 'uglify', 'jshint', 'copy', 'concat'
+    'clean', 'uglify', 'jshint', 'copy', 'concat', 'cssmin'
   ]);
 };

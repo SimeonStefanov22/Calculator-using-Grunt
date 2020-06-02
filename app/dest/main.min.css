@@ -1,0 +1,1 @@
+body{display:flex;justify-content:center}.container{padding:1em;text-align:center;border:2px solid #000;background:wheat}.operator{border:1px solid #000;padding:.5em;margin:.5em;font-size:1.1em}#firstNumber,#secondNumber{padding:1em}#result{font-size:2em}
