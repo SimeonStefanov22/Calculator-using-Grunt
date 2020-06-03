@@ -13,12 +13,12 @@ module.exports = function (grunt) {
         'LICENSE'
       ],
       build: [
-        'app/dest/addition.min.js',
-        'app/dest/multiple.min.js',
-        'app/dest/subtraction.min.js',
-        'app/dest/division.min.js',
-        'app/dest/clearResult.min.js',
-        'app/dest/clearInputFields.min.js'
+        'app/dist/addition.min.js',
+        'app/dist/multiple.min.js',
+        'app/dist/subtraction.min.js',
+        'app/dist/division.min.js',
+        'app/dist/clearResult.min.js',
+        'app/dist/clearInputFields.min.js'
 
       ]
     }
@@ -34,21 +34,18 @@ module.exports = function (grunt) {
       files: ['Gruntfile.js'],
       tasks: ['jshint']
     },
-
-    clean: ["app/test8.js"],
-
     uglify: {
       options: {
         mangle: true
       },
       my_target: {
         files: {
-          'app/dest/addition.min.js': 'app/src/addition.js',
-          'app/dest/multiple.min.js': 'app/src/multiple.js',
-          'app/dest/subtraction.min.js': 'app/src/subtraction.js',
-          'app/dest/division.min.js': 'app/src/division.js',
-          'app/dest/clearResult.min.js': 'app/src/clearResult.js',
-          'app/dest/clearInputFields.min.js': 'app/src/clearInputFields.js'
+          'app/dist/addition.min.js': 'app/src/addition.js',
+          'app/dist/multiple.min.js': 'app/src/multiple.js',
+          'app/dist/subtraction.min.js': 'app/src/subtraction.js',
+          'app/dist/division.min.js': 'app/src/division.js',
+          'app/dist/clearResult.min.js': 'app/src/clearResult.js',
+          'app/dist/clearInputFields.min.js': 'app/src/clearInputFields.js'
         }
       }
     },
@@ -70,10 +67,13 @@ module.exports = function (grunt) {
     cssmin: {
       target: {
         files: {
-          'app/dest/main.min.css': ['app/main.css']
+          'app/dist/main.min.css': ['app/main.css']
         }
       }
-    }
+    },
+    clean: {
+      dist: ["app/test8.js"]
+    } 
   });
 
   // Tell Grunt what to do when we type "grunt" into the terminal
