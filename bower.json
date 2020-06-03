@@ -1,0 +1,17 @@
+{
+  "name": "grunt-test",
+  "description": "",
+  "main": "",
+  "authors": [
+    "SimeonStefanov22 <simeonstefanov1@gmail.com>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/SimeonStefanov22/Calculator-using-Grunt",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

@@ -62,8 +62,9 @@ module.exports = function (grunt) {
     concat: {
       options: { "separator": ";" },
       build: {
+        // cwd: 'app', Защо се добавя cwd???
         src: fileConfigurations.sources.build,
-        dest: "app/builds/app.js"
+        dest: "app/dist/builds/app.js"
       }
     },
     cssmin: {
