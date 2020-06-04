@@ -5,6 +5,8 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
+  grunt.loadNpmTasks('grunt-contrib-htmlmin');
+  grunt.loadNpmTasks('grunt-processhtml');
 
   var fileConfigurations = {
     sources: {
@@ -13,19 +15,19 @@ module.exports = function (grunt) {
         'LICENSE'
       ],
       build: [
-        'app/dist/addition.min.js',
-        'app/dist/multiple.min.js',
-        'app/dist/subtraction.min.js',
-        'app/dist/division.min.js',
-        'app/dist/clearResult.min.js',
-        'app/dist/clearInputFields.min.js'
+        'dist/min/addition.min.js',
+        'dist/min/multiple.min.js',
+        'dist/min/subtraction.min.js',
+        'dist/min/division.min.js',
+        'dist/min/clearResult.min.js',
+        'dist/min/clearInputFields.min.js'
 
       ]
     }
   };
 
   grunt.initConfig({
-    // pkg: grunt.file.readJSON('package.json'),
+    pkg: grunt.file.readJSON('package.json'),
 
     jshint: {
       all: ['Gruntfile.js', 'app/src/**/*.js']
@@ -40,44 +42,68 @@ module.exports = function (grunt) {
       },
       my_target: {
         files: {
-          'app/dist/addition.min.js': 'app/src/addition.js',
-          'app/dist/multiple.min.js': 'app/src/multiple.js',
-          'app/dist/subtraction.min.js': 'app/src/subtraction.js',
-          'app/dist/division.min.js': 'app/src/division.js',
-          'app/dist/clearResult.min.js': 'app/src/clearResult.js',
-          'app/dist/clearInputFields.min.js': 'app/src/clearInputFields.js'
+          'dist/min/addition.min.js': 'app/src/addition.js',
+          'dist/min/multiple.min.js': 'app/src/multiple.js',
+          'dist/min/subtraction.min.js': 'app/src/subtraction.js',
+          'dist/min/division.min.js': 'app/src/division.js',
+          'dist/min/clearResult.min.js': 'app/src/clearResult.js',
+          'dist/min/clearInputFields.min.js': 'app/src/clearInputFields.js'
+        }
+      }
+    },
+    concat: {
+      options: { "separator": ";" },
+      dist: {
+        // cwd: 'app', Защо се добавя cwd???
+        src: fileConfigurations.sources.build,
+        dest: "dist/build.js"
+      }
+    },
+    cssmin: {
+      target: {
+        files: {
+          'dist/main.min.css': ['app/main.css']
+        }
+      }
+    },
+    processhtml: {
+      dist: {
+        options: {
+          process: true,
+          data: {
+            title: 'Calculator',
+            message: 'This is production distribution'
+          }
+        },
+        files: {
+          'dist/min/index.min.html': ['app/index.html']
+        }
+      }
+    },
+    htmlmin: {
+      dist: {
+        options: {
+          removeComments: true,
+          collapseWhitespace: true
+        },
+        files: {
+          'dist/index.html': 'dist/min/index.min.html'
         }
       }
     },
     copy: {
       main: {
         expand: true,
-        src: 'app/src/*',
-        dest: 'app/copy/',
-      },
-    },
-    concat: {
-      options: { "separator": ";" },
-      build: {
-        // cwd: 'app', Защо се добавя cwd???
-        src: fileConfigurations.sources.build,
-        dest: "app/dist/builds/app.js"
+        src: 'app/**/*',
+        dest: 'copy',
       }
     },
-    cssmin: {
-      target: {
-        files: {
-          'app/dist/main.min.css': ['app/main.css']
-        }
-      }
-    },
-    clean: {
-      dist: ["app/test8.js"]
-    } 
+    clean: 'dist/min'
+
   });
 
   // Tell Grunt what to do when we type "grunt" into the terminal
   grunt.registerTask('default', [
-    'clean', 'uglify', 'jshint', 'copy', 'concat', 'cssmin'
+    'jshint', 'uglify', 'concat', 'cssmin', 'processhtml', 'htmlmin', 'copy', 'clean'
   ]);
 };
