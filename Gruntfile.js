@@ -26,6 +26,8 @@ module.exports = function (grunt) {
     }
   };
 
+  var target = grunt.option('target') || 'app';
+  
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
 
@@ -92,10 +94,15 @@ module.exports = function (grunt) {
       }
     },
     copy: {
-      main: {
+      app: {
         expand: true,
-        src: 'app/**/*',
-        dest: 'copy',
+          src: 'app/**/*',
+          dest: 'copy'
+      },
+      addition: {
+        expand: true,
+          src: 'app/src/addition.js',
+          dest: 'copy/test'
       }
     },
     clean: 'dist/min'
@@ -104,6 +111,7 @@ module.exports = function (grunt) {
 
   // Tell Grunt what to do when we type "grunt" into the terminal
   grunt.registerTask('default', [
-    'jshint', 'uglify', 'concat', 'cssmin', 'processhtml', 'htmlmin', 'copy', 'clean'
+    'jshint', 'uglify', 'concat', 'cssmin', 'processhtml', 'htmlmin', 'clean'
   ]);
+  grunt.registerTask('test', ['copy:' + target]);
 };
